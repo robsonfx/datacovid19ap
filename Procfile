@@ -1,0 +1,1 @@
+web: gunicorn datacovid19ap.wsgi

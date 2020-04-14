@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lepr*g0^ht@d+t*jue5m+&8b@y(k$#l8rgt79dl=3#4wf*u2-a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,17 +75,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'datacovid19ap.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -102,6 +92,16 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+import django_heroku
+import dj_database_url
+django_heroku.settings(locals())
+
+
+DATABASES = {
+    'default':  dj_database_url.config(),
+}
 
 
 #cors
@@ -128,4 +128,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'simplemooc', 'media')
+MEDIA_URL = '/media/'
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
+
+try:
+    from datacovid19ap.local_settings import *
+except ImportError:
+    pass
