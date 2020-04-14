@@ -31,7 +31,7 @@ class Registro(models.Model):
         ITAUBAL =           15, ('ITAUBAL')
         PRACUUBA =          16, ('PRACUUBA')
     
-    cidade = models.IntegerField("Cidade", max_length=255, choices=Municipios.choices)
+    cidade = models.IntegerField("Cidade", choices=Municipios.choices)
     data        = models.DateField("Data do Registro")
     suspeitos   = models.IntegerField('Qtd Suspeitos', blank=True, null=True)
     confirmados = models.IntegerField('Qtd Confirmados', blank=True, null=True)
