@@ -6,6 +6,7 @@ import datetime
 from .signals import csv_uploaded
 from .validators import csv_file_validator
 from django.db.models.signals import pre_save, post_save
+from datetime import datetime
 
 # Create your models here.
 
@@ -55,14 +56,9 @@ def upload_csv_file(instance, filename):
         num_ = 1
     return f'csv/{num_}/{instance.user.username}/{filename}'
 
-def convert_header(csvHeader):
-    header_ = csvHeader[0]
-    cols = [x.replace(' ', '_').lower() for x in header_.split(",")]
-    return cols
-
 def create_registro(dados):
     registro = Registro.objects.create(
-        cidade=int(dados['cidade']),
+        cidade=dados['cidade'],
         data=dados['data'],
         suspeitos=dados['suspeitos'],
         confirmados=dados['confirmados'],
@@ -94,16 +90,16 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
         io_string = io.StringIO(decoded_file)
         reader = csv.reader(io_string, delimiter=';', quotechar='|')
         header_ = next(reader)
-        header_cols = convert_header(header_)
-        print(header_cols, str(len(header_cols)))
+        header_cols = header_
+        
         parsed_items = []
-    
+        
         for line in reader:
-            # print(line)
+
             parsed_row_data = {}
             i = 0
-            print(line[0].split(','), len(line[0].split(',')))
-            row_item = line[0].split(',')
+            row_item = line
+
             for item in row_item:
                 key = header_cols[i]
                 parsed_row_data[key] = item
