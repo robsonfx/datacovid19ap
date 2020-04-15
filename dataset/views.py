@@ -14,7 +14,7 @@ def lista_registros(request):
         data = []
         nextPage = 1
         previousPage = 1
-        registros = Registro.objects.all()
+        registros = Registro.objects.all().order_by('data')
         page = request.GET.get('page', 1)
         paginator = Paginator(registros, 10)
         try:
