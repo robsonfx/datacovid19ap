@@ -1,0 +1,28 @@
+version: '3'
+volumes:
+    pg-data:
+      driver: local
+services:
+    app_covid:
+        image: python:3.6
+        container_name: app_covid
+        build: .
+        command: "tail -f dev/null"
+        volumes:
+        - .:/app
+        ports:
+        - "9501:8000"
+
+    pgsqcovid:
+        image: postgres:12.1
+        container_name: pgsqcovid-pg-12
+        restart: always
+        volumes:
+        - pg-data:$PWD/data/pgsqcovid
+        ports:
+        - "5412:5432"
+        environment:
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=postgres
+
