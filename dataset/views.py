@@ -6,7 +6,7 @@ from rest_framework import status
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Registro
-from .serializers import *
+from .serializers import RegistroSerializer
 
 @api_view(['GET'])
 def lista_registros(request):
