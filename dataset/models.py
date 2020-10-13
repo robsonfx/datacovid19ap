@@ -9,28 +9,26 @@ from django.db.models.signals import pre_save, post_save
 from datetime import datetime
 
 # Create your models here.
-
+class Municipios(models.IntegerChoices):
+    MACAPA =            1, ('MACAPÁ')
+    SANTANA =           2, ('SANTANA')
+    LARANJAL_DO_JARI =  3, ('LARANJAL DO JARI')
+    OIAPOQUE =          4, ('OIAPOQUE')
+    MAZAGAO =           5, ('MAZAGÃO')
+    PORTO_GRANDE =      6, ('PORTO GRANDE')
+    TARTARUGALZINHO =   7, ('TARTARUGALZINHO')
+    VITORIA_DO_JARI =   8, ('VITORIA DO JARI')
+    PEDRA_BRANCA_DO_AMAPARI = 9, ('PEDRA BRANCA DO AMAPARI')
+    CALCOENE =          10, ('CALÇOENE')
+    AMAPA =             11, ('AMAPÁ')
+    FERREIRA_GOMES =    12, ('FERREIRA GOMES') 
+    CUTIAS_DO_ARAGUARY = 13, ('CUTIAS DO ARAGUARY')
+    SERRA_DO_NAVIO =    14, ('SERRA DO NAVIO')
+    ITAUBAL =           15, ('ITAUBAL')
+    PRACUUBA =          16, ('PRACUUBA')
 
 
 class Registro(models.Model):
-    
-    class Municipios(models.IntegerChoices):
-        MACAPA =            1, ('MACAPÁ')
-        SANTANA =           2, ('SANTANA')
-        LARANJAL_DO_JARI =  3, ('LARANJAL DO JARI')
-        OIAPOQUE =          4, ('OIAPOQUE')
-        MAZAGAO =           5, ('MAZAGÃO')
-        PORTO_GRANDE =      6, ('PORTO GRANDE')
-        TARTARUGALZINHO =   7, ('TARTARUGALZINHO')
-        VITORIA_DO_JARI =   8, ('VITORIA DO JARI')
-        PEDRA_BRANCA_DO_AMAPARI = 9, ('PEDRA BRANCA DO AMAPARI')
-        CALCOENE =          10, ('CALÇOENE')
-        AMAPA =             11, ('AMAPÁ')
-        FERREIRA_GOMES =    12, ('FERREIRA GOMES') 
-        CUTIAS_DO_ARAGUARY = 13, ('CUTIAS DO ARAGUARY')
-        SERRA_DO_NAVIO =    14, ('SERRA DO NAVIO')
-        ITAUBAL =           15, ('ITAUBAL')
-        PRACUUBA =          16, ('PRACUUBA')
     
     cidade = models.IntegerField("Cidade", choices=Municipios.choices)
     data        = models.DateField("Data do Registro")
