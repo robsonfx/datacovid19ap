@@ -1,2 +1,2 @@
 # datacovid19ap
-Sistema mostra m tempo rela o acompanhamento do número de casos da covid-19 no estado nos municipios do estado do Amapá
+Sistema mostrará em tempo real  o mapa de contaminação  da covid-19 no Estado do Amapá  listando or municipios 
